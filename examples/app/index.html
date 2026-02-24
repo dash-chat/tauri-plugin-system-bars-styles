@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>System Bars Styles Example</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: system-ui, sans-serif; padding: 2rem; }
+      h1 { margin-bottom: 1rem; }
+      .controls { display: flex; flex-direction: column; gap: 1rem; max-width: 400px; }
+      label { font-weight: 600; }
+      select { padding: 0.5rem; font-size: 1rem; }
+      button { padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; }
+      #status { margin-top: 1rem; color: #666; }
+    </style>
+  </head>
+  <body>
+    <h1>System Bars Styles</h1>
+    <div class="controls">
+      <div>
+        <label for="status-bar">Status Bar Style</label>
+        <select id="status-bar">
+          <option value="dark">dark (black icons, for light backgrounds)</option>
+          <option value="light">light (white icons, for dark backgrounds)</option>
+        </select>
+      </div>
+      <div>
+        <label for="nav-bar">Navigation Bar Style</label>
+        <select id="nav-bar">
+          <option value="dark">dark (black icons, for light backgrounds)</option>
+          <option value="light">light (white icons, for dark backgrounds)</option>
+        </select>
+      </div>
+      <button id="apply">Apply</button>
+      <p id="status"></p>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

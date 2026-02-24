@@ -1,0 +1,20 @@
+{
+  "productName": "system-bars-styles-example",
+  "version": "0.1.0",
+  "identifier": "org.dashchat.systembarsstyles.example",
+  "build": {
+    "devUrl": "http://localhost:1420",
+    "frontendDist": "../dist",
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "System Bars Styles Example",
+        "width": 400,
+        "height": 500
+      }
+    ]
+  }
+}

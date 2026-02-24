@@ -1,0 +1,15 @@
+[package]
+name = "system-bars-styles-example"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "system_bars_styles_example"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = "2"
+tauri-plugin-system-bars-styles = { path = "../../.." }

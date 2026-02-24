@@ -1,0 +1,20 @@
+{
+  "name": "tauri-plugin-system-bars-styles",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "guest-js"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2"
+  }
+}
