@@ -7,6 +7,7 @@ pub(crate) async fn set_style<R: Runtime>(
     #[allow(unused_variables)] app: AppHandle<R>,
     #[allow(unused_variables)] status_bar_style: BarStyle,
     #[allow(unused_variables)] navigation_bar_style: BarStyle,
+    #[allow(unused_variables)] navigation_bar_transparent: Option<bool>,
 ) -> crate::Result<()> {
     #[cfg(mobile)]
     {
@@ -15,6 +16,7 @@ pub(crate) async fn set_style<R: Runtime>(
             crate::models::SetStylePayload {
                 status_bar_style,
                 navigation_bar_style,
+                navigation_bar_transparent: navigation_bar_transparent.unwrap_or(false),
             },
         )?;
     }

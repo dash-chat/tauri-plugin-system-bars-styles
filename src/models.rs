@@ -12,4 +12,6 @@ pub enum BarStyle {
 pub struct SetStylePayload {
     pub status_bar_style: BarStyle,
     pub navigation_bar_style: BarStyle,
+    #[serde(default)]
+    pub navigation_bar_transparent: bool,
 }
