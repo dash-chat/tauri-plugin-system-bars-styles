@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-override-system-bars-color-scheme"
+description = "Enables the override_system_bars_color_scheme command without any pre-configured scope."
+commands.allow = ["override_system_bars_color_scheme"]
+
+[[permission]]
+identifier = "deny-override-system-bars-color-scheme"
+description = "Denies the override_system_bars_color_scheme command without any pre-configured scope."
+commands.deny = ["override_system_bars_color_scheme"]

@@ -1,5 +1,5 @@
 {
-  "name": "tauri-plugin-system-bars-styles",
+  "name": "tauri-plugin-system-theme",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
@@ -9,12 +9,17 @@
     "guest-js"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "tsc"
   },
   "devDependencies": {
+    "signalium": "^3.0.1",
     "typescript": "^5.6.0"
   },
   "dependencies": {
     "@tauri-apps/api": "^2"
+  },
+  "peerDependencies": {
+    "signalium": "^3"
   }
 }

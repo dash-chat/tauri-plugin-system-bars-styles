@@ -1,5 +1,5 @@
 {
-  "name": "system-bars-styles-example",
+  "name": "system-theme-example",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^2",
-    "tauri-plugin-system-bars-styles": "../../"
+    "tauri-plugin-system-theme": "../../"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2",

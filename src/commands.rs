@@ -1,24 +1,37 @@
-use tauri::{command, AppHandle, Runtime};
+use tauri::{command, AppHandle, Emitter, Runtime};
 
-use crate::models::BarStyle;
+use crate::models::{ColorScheme, ColorSchemePreference};
+
+/// Emitted whenever the colour scheme changes, so a frontend can track it
+/// without polling. Mirrors the convention of the official plugins.
+const CHANGED_EVENT: &str = "system-theme://changed";
 
 #[command]
-pub(crate) async fn set_style<R: Runtime>(
+pub(crate) async fn get_color_scheme_preference<R: Runtime>(app: AppHandle<R>) -> crate::Result<ColorSchemePreference> {
+    Ok(crate::store::load(&app))
+}
+
+#[command]
+pub(crate) async fn set_color_scheme_preference<R: Runtime>(
+    app: AppHandle<R>,
+    scheme: ColorSchemePreference,
+) -> crate::Result<()> {
+    crate::store::save(&app, scheme)?;
+    crate::apply_color_scheme_preference(&app, scheme)?;
+    app.emit(CHANGED_EVENT, scheme)?;
+    Ok(())
+}
+
+#[command]
+pub(crate) async fn override_system_bars_color_scheme<R: Runtime>(
     #[allow(unused_variables)] app: AppHandle<R>,
-    #[allow(unused_variables)] status_bar_style: BarStyle,
-    #[allow(unused_variables)] navigation_bar_style: BarStyle,
-    #[allow(unused_variables)] navigation_bar_transparent: Option<bool>,
+    #[allow(unused_variables)] scheme: Option<ColorScheme>,
 ) -> crate::Result<()> {
     #[cfg(mobile)]
     {
-        use crate::SystemBarsStylesExt;
-        app.system_bars_styles().set_style(
-            crate::models::SetStylePayload {
-                status_bar_style,
-                navigation_bar_style,
-                navigation_bar_transparent: navigation_bar_transparent.unwrap_or(false),
-            },
-        )?;
+        use crate::SystemThemeExt;
+        app.system_theme()
+            .override_system_bars_color_scheme(crate::models::OverrideSystemBarsColorSchemePayload { scheme })?;
     }
     Ok(())
 }

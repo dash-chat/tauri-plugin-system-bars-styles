@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "org.dashchat.systembarsstyles"
+    namespace = "org.dashchat.systemtheme"
     compileSdk = 36
 
     defaultConfig {
@@ -35,5 +35,6 @@ android {
 dependencies {
     implementation("androidx.core:core:1.17.0")
     implementation("androidx.core:core-ktx:1.17.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
     implementation(project(":tauri-android"))
 }

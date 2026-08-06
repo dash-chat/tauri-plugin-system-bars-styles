@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-get-color-scheme-preference"
+description = "Enables the get_color_scheme_preference command without any pre-configured scope."
+commands.allow = ["get_color_scheme_preference"]
+
+[[permission]]
+identifier = "deny-get-color-scheme-preference"
+description = "Denies the get_color_scheme_preference command without any pre-configured scope."
+commands.deny = ["get_color_scheme_preference"]

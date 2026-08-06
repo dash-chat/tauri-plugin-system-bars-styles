@@ -1,19 +1,38 @@
-import { setStyle } from 'tauri-plugin-system-bars-styles';
-import type { BarStyle } from 'tauri-plugin-system-bars-styles';
+import {
+  overrideSystemBarsColorScheme,
+  setColorSchemePreference,
+} from "tauri-plugin-system-theme";
+import type {
+  ColorScheme,
+  ColorSchemePreference,
+} from "tauri-plugin-system-theme";
 
-const statusBarSelect = document.getElementById('status-bar') as HTMLSelectElement;
-const navBarSelect = document.getElementById('nav-bar') as HTMLSelectElement;
-const applyButton = document.getElementById('apply')!;
-const statusEl = document.getElementById('status')!;
+const schemeSelect = document.getElementById("scheme") as HTMLSelectElement;
+const barsSelect = document.getElementById("bars") as HTMLSelectElement;
+const applyBarsButton = document.getElementById("apply-bars")!;
+const statusEl = document.getElementById("status")!;
 
-applyButton.addEventListener('click', async () => {
-  const statusBarStyle = statusBarSelect.value as BarStyle;
-  const navigationBarStyle = navBarSelect.value as BarStyle;
+function report(message: string) {
+  statusEl.textContent = message;
+}
 
+schemeSelect.addEventListener("change", async () => {
+  const scheme = schemeSelect.value as ColorSchemePreference;
   try {
-    await setStyle({ statusBarStyle, navigationBarStyle });
-    statusEl.textContent = `Applied: status=${statusBarStyle}, nav=${navigationBarStyle}`;
+    await setColorSchemePreference(scheme);
+    report(`Colour scheme: ${scheme} (persisted)`);
   } catch (e) {
-    statusEl.textContent = `Error: ${e}`;
+    report(`Error: ${e}`);
+  }
+});
+
+applyBarsButton.addEventListener("click", async () => {
+  const value = barsSelect.value;
+  const scheme = value === "auto" ? null : (value as ColorScheme);
+  try {
+    await overrideSystemBarsColorScheme(scheme);
+    report(`Bars: ${scheme ?? "tracking the theme"} (transient)`);
+  } catch (e) {
+    report(`Error: ${e}`);
   }
 });

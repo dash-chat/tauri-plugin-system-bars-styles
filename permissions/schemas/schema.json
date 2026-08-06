@@ -295,22 +295,46 @@
       "type": "string",
       "oneOf": [
         {
-          "description": "Enables the set_style command without any pre-configured scope.",
+          "description": "Enables the get_color_scheme_preference command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-set-style",
-          "markdownDescription": "Enables the set_style command without any pre-configured scope."
+          "const": "allow-get-color-scheme-preference",
+          "markdownDescription": "Enables the get_color_scheme_preference command without any pre-configured scope."
         },
         {
-          "description": "Denies the set_style command without any pre-configured scope.",
+          "description": "Denies the get_color_scheme_preference command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-set-style",
-          "markdownDescription": "Denies the set_style command without any pre-configured scope."
+          "const": "deny-get-color-scheme-preference",
+          "markdownDescription": "Denies the get_color_scheme_preference command without any pre-configured scope."
         },
         {
-          "description": "Default permissions for the system-bars-styles plugin\n#### This default permission set includes:\n\n- `allow-set-style`",
+          "description": "Enables the override_system_bars_color_scheme command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-override-system-bars-color-scheme",
+          "markdownDescription": "Enables the override_system_bars_color_scheme command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the override_system_bars_color_scheme command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-override-system-bars-color-scheme",
+          "markdownDescription": "Denies the override_system_bars_color_scheme command without any pre-configured scope."
+        },
+        {
+          "description": "Enables the set_color_scheme_preference command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-set-color-scheme-preference",
+          "markdownDescription": "Enables the set_color_scheme_preference command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the set_color_scheme_preference command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-set-color-scheme-preference",
+          "markdownDescription": "Denies the set_color_scheme_preference command without any pre-configured scope."
+        },
+        {
+          "description": "Default permissions for the system-theme plugin\n#### This default permission set includes:\n\n- `allow-get-color-scheme-preference`\n- `allow-set-color-scheme-preference`\n- `allow-override-system-bars-color-scheme`",
           "type": "string",
           "const": "default",
-          "markdownDescription": "Default permissions for the system-bars-styles plugin\n#### This default permission set includes:\n\n- `allow-set-style`"
+          "markdownDescription": "Default permissions for the system-theme plugin\n#### This default permission set includes:\n\n- `allow-get-color-scheme-preference`\n- `allow-set-color-scheme-preference`\n- `allow-override-system-bars-color-scheme`"
         }
       ]
     }

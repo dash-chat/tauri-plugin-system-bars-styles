@@ -1,10 +1,10 @@
 [package]
-name = "system-bars-styles-example"
+name = "system-theme-example"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "system_bars_styles_example"
+name = "system_theme_example"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
@@ -12,4 +12,4 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 tauri = "2"
-tauri-plugin-system-bars-styles = { path = "../../.." }
+tauri-plugin-system-theme = { path = "../../.." }

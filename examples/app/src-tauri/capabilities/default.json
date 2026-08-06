@@ -3,6 +3,6 @@
   "windows": ["main"],
   "permissions": [
     "core:default",
-    "system-bars-styles:default"
+    "system-theme:default"
   ]
 }

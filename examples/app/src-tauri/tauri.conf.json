@@ -1,7 +1,7 @@
 {
-  "productName": "system-bars-styles-example",
+  "productName": "system-theme-example",
   "version": "0.1.0",
-  "identifier": "org.dashchat.systembarsstyles.example",
+  "identifier": "org.dashchat.systemtheme.example",
   "build": {
     "devUrl": "http://localhost:1420",
     "frontendDist": "../dist",

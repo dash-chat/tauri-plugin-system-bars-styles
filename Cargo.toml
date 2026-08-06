@@ -1,9 +1,9 @@
 [package]
-name = "tauri-plugin-system-bars-styles"
+name = "tauri-plugin-system-theme"
 version = "0.1.0"
 edition = "2021"
-links = "tauri-plugin-system-bars-styles"
-description = "Tauri plugin to control Android system bar icon styles independently"
+links = "tauri-plugin-system-theme"
+description = "Tauri plugin to apply the app's colour scheme at the system level"
 license = "AGPL-3.0"
 
 [dependencies]
@@ -12,6 +12,16 @@ serde = "1"
 serde_json = "1"
 thiserror = "2"
 log = "0.4"
+
+[target.'cfg(target_os = "ios")'.dependencies]
+objc2 = "0.6"
+objc2-ui-kit = { version = "0.3", features = [
+	"UIColor",
+	"UIResponder",
+	"UIScrollView",
+	"UIView",
+	"UIWindow",
+] }
 
 [build-dependencies]
 tauri-plugin = { version = "2.5", features = ["build"] }

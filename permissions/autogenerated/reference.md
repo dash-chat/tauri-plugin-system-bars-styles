@@ -1,10 +1,12 @@
 ## Default Permission
 
-Default permissions for the system-bars-styles plugin
+Default permissions for the system-theme plugin
 
 #### This default permission set includes the following:
 
-- `allow-set-style`
+- `allow-get-color-scheme-preference`
+- `allow-set-color-scheme-preference`
+- `allow-override-system-bars-color-scheme`
 
 ## Permission Table
 
@@ -18,12 +20,12 @@ Default permissions for the system-bars-styles plugin
 <tr>
 <td>
 
-`system-bars-styles:allow-set-style`
+`system-theme:allow-get-color-scheme-preference`
 
 </td>
 <td>
 
-Enables the set_style command without any pre-configured scope.
+Enables the get_color_scheme_preference command without any pre-configured scope.
 
 </td>
 </tr>
@@ -31,12 +33,64 @@ Enables the set_style command without any pre-configured scope.
 <tr>
 <td>
 
-`system-bars-styles:deny-set-style`
+`system-theme:deny-get-color-scheme-preference`
 
 </td>
 <td>
 
-Denies the set_style command without any pre-configured scope.
+Denies the get_color_scheme_preference command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`system-theme:allow-override-system-bars-color-scheme`
+
+</td>
+<td>
+
+Enables the override_system_bars_color_scheme command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`system-theme:deny-override-system-bars-color-scheme`
+
+</td>
+<td>
+
+Denies the override_system_bars_color_scheme command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`system-theme:allow-set-color-scheme-preference`
+
+</td>
+<td>
+
+Enables the set_color_scheme_preference command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`system-theme:deny-set-color-scheme-preference`
+
+</td>
+<td>
+
+Denies the set_color_scheme_preference command without any pre-configured scope.
 
 </td>
 </tr>

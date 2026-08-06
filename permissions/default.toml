@@ -1,3 +1,7 @@
 [default]
-description = "Default permissions for the system-bars-styles plugin"
-permissions = ["allow-set-style"]
+description = "Default permissions for the system-theme plugin"
+permissions = [
+    "allow-get-color-scheme-preference",
+    "allow-set-color-scheme-preference",
+    "allow-override-system-bars-color-scheme",
+]

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>System Bars Styles Example</title>
+    <title>System Theme Example</title>
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body { font-family: system-ui, sans-serif; padding: 2rem; }
@@ -16,23 +16,25 @@
     </style>
   </head>
   <body>
-    <h1>System Bars Styles</h1>
+    <h1>System Theme</h1>
     <div class="controls">
       <div>
-        <label for="status-bar">Status Bar Style</label>
-        <select id="status-bar">
-          <option value="dark">dark (black icons, for light backgrounds)</option>
-          <option value="light">light (white icons, for dark backgrounds)</option>
+        <label for="scheme">Colour scheme (persisted)</label>
+        <select id="scheme">
+          <option value="system">system (follow the device)</option>
+          <option value="light">light</option>
+          <option value="dark">dark</option>
         </select>
       </div>
       <div>
-        <label for="nav-bar">Navigation Bar Style</label>
-        <select id="nav-bar">
+        <label for="bars">Bar icons (transient)</label>
+        <select id="bars">
+          <option value="auto">auto (track the colour scheme)</option>
           <option value="dark">dark (black icons, for light backgrounds)</option>
           <option value="light">light (white icons, for dark backgrounds)</option>
         </select>
       </div>
-      <button id="apply">Apply</button>
+      <button id="apply-bars">Apply bars</button>
       <p id="status"></p>
     </div>
     <script type="module" src="/src/main.ts"></script>
