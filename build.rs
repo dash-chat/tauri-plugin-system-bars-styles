@@ -3,5 +3,6 @@ const COMMANDS: &[&str] = &["get_color_scheme_preference", "set_color_scheme_pre
 fn main() {
     tauri_plugin::Builder::new(COMMANDS)
         .android_path("android")
+        .ios_path("ios")
         .build();
 }

@@ -3,6 +3,8 @@
 node_modules
 /android/.tauri
 /android/build
+/.tauri
+/ios/.build
 /examples/app/src-tauri/gen
 /examples/app/src-tauri/target
 /examples/app/dist
