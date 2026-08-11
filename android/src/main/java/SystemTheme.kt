@@ -3,6 +3,7 @@ package org.dashchat.systemtheme
 import android.app.UiModeManager
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Build
 import android.view.Window
 import androidx.appcompat.app.AppCompatDelegate
@@ -10,6 +11,7 @@ import androidx.core.view.WindowCompat
 
 private const val PREFS_NAME = "system-theme"
 private const val COLOR_SCHEME_KEY = "color-scheme"
+private const val FLIP_DELAY_MS = 250L
 
 /**
  * The app's colour scheme, applied to the Android configuration so the resource
@@ -44,6 +46,21 @@ object SystemTheme {
             window,
             scheme?.equals("light") ?: isNight(context.resources.configuration),
         )
+    }
+
+    /**
+     * Keep the navigation bar see-through, so the app's own surface reaches the
+     * screen edge. Set on the window rather than declared in the theme because
+     * the system's contrast scrim gets turned back on once the activity is up
+     * (androidx's `enableEdgeToEdge` does exactly that).
+     */
+    @Suppress("DEPRECATION")
+    fun makeNavigationBarTransparent(window: Window) {
+        // Ignored from API 35 on, where the bar is always transparent anyway.
+        window.navigationBarColor = Color.TRANSPARENT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+        }
     }
 
     /**
@@ -101,8 +118,22 @@ object SystemTheme {
         }
     }
 
-    /** The nav-bar colour and contrast are the host theme's business, not ours. */
+    /**
+     * Only the icon colour: the bars themselves stay transparent.
+     *
+     * Some skins repaint the icons when the appearance changes rather than when
+     * it is set, and take the first value after the window is created without
+     * ever drawing it. Writing the flipped value first is a change they cannot
+     * miss — well clear of a frame, since the appearance only reaches the window
+     * manager once per traversal and two writes in one would cancel out. The
+     * flip is what the bars already show whenever it matters, so it goes unseen.
+     */
     private fun applyBarsAppearance(window: Window, lightIcons: Boolean) {
+        setBarsAppearance(window, !lightIcons)
+        window.decorView.postDelayed({ setBarsAppearance(window, lightIcons) }, FLIP_DELAY_MS)
+    }
+
+    private fun setBarsAppearance(window: Window, lightIcons: Boolean) {
         val controller = WindowCompat.getInsetsController(window, window.decorView)
         controller.isAppearanceLightStatusBars = !lightIcons
         controller.isAppearanceLightNavigationBars = !lightIcons

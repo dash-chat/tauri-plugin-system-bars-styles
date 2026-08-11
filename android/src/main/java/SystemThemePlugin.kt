@@ -2,6 +2,7 @@ package org.dashchat.systemtheme
 
 import android.app.Activity
 import android.content.res.Configuration
+import android.webkit.WebView
 import app.tauri.annotation.Command
 import app.tauri.annotation.InvokeArg
 import app.tauri.annotation.TauriPlugin
@@ -21,6 +22,12 @@ class OptionalSchemeArgs {
 
 @TauriPlugin
 class SystemThemePlugin(private val activity: Activity) : Plugin(activity) {
+    override fun load(webView: WebView) {
+        activity.runOnUiThread {
+            SystemTheme.makeNavigationBarTransparent(activity.window)
+        }
+    }
+
     @Command
     fun setColorSchemePreference(invoke: Invoke) {
         val args = invoke.parseArgs(SchemeArgs::class.java)
