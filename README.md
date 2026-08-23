@@ -14,7 +14,7 @@ system theme.
 | Platform | Colour scheme | Bar icons |
 |----------|---------------|-----------|
 | Android  | `UiModeManager.setApplicationNightMode` (API 31+), `AppCompatDelegate` below | Supported |
-| iOS      | `UIWindow.overrideUserInterfaceStyle` | Follows the window |
+| iOS      | `UIWindow.overrideUserInterfaceStyle` | Status bar supported; no navigation bar, and the home indicator picks its own contrast |
 | Desktop  | `AppHandle::set_theme` | n/a |
 
 On Android the scheme is persisted *by the system*, which is what lets it theme

@@ -16,6 +16,39 @@ class OverrideSystemBarsColorSchemeArgs: Decodable {
     let scheme: String?
 }
 
+/// The status bar takes its style from the window's root view controller, which
+/// Tauri owns and does not let us subclass. Replacing UIKit's implementation of
+/// the getter is what lets an override reach it without moving the window's
+/// interface style: the webview's `prefers-color-scheme` follows that style, and
+/// an overlay recolouring the bars is not meant to drag the page's theme along.
+private enum StatusBarStyleOverride {
+    private(set) static var style: UIStatusBarStyle?
+
+    /// Main thread only, like every other reader of the getter it feeds. The
+    /// getter is left alone until an override is first asked for, so an app that
+    /// never asks runs on a stock UIKit.
+    static func set(_ style: UIStatusBarStyle?) {
+        _ = install
+        self.style = style
+    }
+
+    private static let install: Void = {
+        let selector = #selector(getter: UIViewController.preferredStatusBarStyle)
+        guard let method = class_getInstanceMethod(UIViewController.self, selector) else {
+            return
+        }
+
+        typealias Getter = @convention(c) (UIViewController, Selector) -> UIStatusBarStyle
+        let original = unsafeBitCast(method_getImplementation(method), to: Getter.self)
+
+        let replacement: @convention(block) (UIViewController) -> UIStatusBarStyle = {
+            controller in
+            StatusBarStyleOverride.style ?? original(controller, selector)
+        }
+        method_setImplementation(method, imp_implementationWithBlock(replacement))
+    }()
+}
+
 class SystemThemePlugin: Plugin {
     private var windowObserver: NSObjectProtocol?
 
@@ -51,17 +84,32 @@ class SystemThemePlugin: Plugin {
 
         let style = Self.style(for: args.scheme)
         DispatchQueue.main.async {
+            Self.applyStatusBarStyleOverride(nil)
             Self.applyToAllWindows(style)
         }
 
         invoke.resolve()
     }
 
-    /// The status bar tracks the window's interface style on iOS, so there is
-    /// nothing to force independently of it.
+    /// iOS has no navigation bar to recolour, and the home indicator picks its
+    /// own contrast off whatever is drawn behind it, so the status bar is the
+    /// whole of the override here.
     @objc public func overrideSystemBarsColorScheme(_ invoke: Invoke) throws {
-        _ = try invoke.parseArgs(OverrideSystemBarsColorSchemeArgs.self)
+        let args = try invoke.parseArgs(OverrideSystemBarsColorSchemeArgs.self)
+        let style = args.scheme.map { $0 == "light" ? UIStatusBarStyle.lightContent : .darkContent }
+
+        DispatchQueue.main.async {
+            Self.applyStatusBarStyleOverride(style)
+        }
+
         invoke.resolve()
+    }
+
+    private static func applyStatusBarStyleOverride(_ style: UIStatusBarStyle?) {
+        StatusBarStyleOverride.set(style)
+        for window in appWindows() {
+            window.rootViewController?.setNeedsStatusBarAppearanceUpdate()
+        }
     }
 
     private func applyPersisted() {
